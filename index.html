@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fikrlar Osmoni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kecha1:#03060f;
+    --kecha2:#0a1630;
+    --kecha3:#132244;
+    --muz:#dcecff;
+    --muz-ochiq:#eaf4ff;
+    --kumush:#9fb3c8;
+    --olov1:#ff8c3c;
+    --olov2:#ff5a1e;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; min-height:100%;
+    font-family:'Inter',sans-serif;
+    color:var(--muz-ochiq);
+    background:
+      radial-gradient(ellipse 900px 500px at 78% 10%, rgba(150,190,240,.14), transparent 60%),
+      linear-gradient(180deg, var(--kecha1) 0%, var(--kecha2) 55%, var(--kecha3) 100%);
+    overflow-x:hidden;
+  }
+  h1,h2,.sarlavha{font-family:'Playfair Display', serif;}
+
+  /* ===== Oy va yorug'lik ===== */
+  .oy-nuri{
+    position:fixed; inset:0; pointer-events:none; z-index:2;
+    box-shadow:
+      inset 0 0 140px 50px rgba(170,210,255,.16),
+      inset 0 0 260px 90px rgba(120,170,230,.10);
+    animation:nurPulse 6s ease-in-out infinite;
+  }
+  @keyframes nurPulse{0%,100%{opacity:.65}50%{opacity:1}}
+
+  .oy{
+    position:fixed; top:36px; right:7%; width:100px; height:100px; border-radius:50%; z-index:1;
+    background:
+      radial-gradient(circle at 32% 70%, rgba(0,0,0,.10) 6%, transparent 7%),
+      radial-gradient(circle at 60% 35%, rgba(0,0,0,.08) 9%, transparent 10%),
+      radial-gradient(circle at 70% 65%, rgba(0,0,0,.07) 5%, transparent 6%),
+      radial-gradient(circle at 40% 40%, #ffffff, var(--muz) 45%, #a9c9e8 78%, #7fa8cc 100%);
+    box-shadow: 0 0 60px 18px rgba(210,230,255,.5), 0 0 140px 60px rgba(150,195,240,.22);
+  }
+
+  /* ===== Yulduzlar ===== */
+  .yulduzlar{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 20%, #fff, transparent),
+      radial-gradient(1px 1px at 25% 55%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 40% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 60% 40%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 75% 25%, #fff, transparent),
+      radial-gradient(1px 1px at 85% 60%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 15% 75%, #fff, transparent),
+      radial-gradient(1px 1px at 92% 15%, #fff, transparent);
+    background-size: 100% 100%;
+    opacity:.8;
+  }
+
+  /* ===== Qor ===== */
+  #qor{ position:fixed; inset:0; z-index:5; pointer-events:none; overflow:hidden; }
+  .qor-dona{
+    position:absolute; top:-5vh; color:var(--muz-ochiq);
+    text-shadow:0 0 6px rgba(200,230,255,.8);
+    animation-name:qorYogadi; animation-timing-function:linear; animation-iteration-count:infinite;
+    will-change:transform;
+  }
+  @keyframes qorYogadi{
+    0%  {transform:translateY(-10vh) translateX(0);}
+    25% {transform:translateY(25vh) translateX(12px);}
+    50% {transform:translateY(55vh) translateX(-12px);}
+    75% {transform:translateY(80vh) translateX(10px);}
+    100%{transform:translateY(112vh) translateX(0);}
+  }
+
+  /* ===== Tog' silueti ===== */
+  .tog{ position:fixed; left:0; right:0; bottom:0; z-index:3; pointer-events:none; opacity:.9; }
+
+  /* ===== Tartib ===== */
+  .sahifa{ position:relative; z-index:10; max-width:720px; margin:0 auto; padding:28px 18px 60px; }
+
+  .peshtaxta{ display:flex; justify-content:space-between; align-items:center; padding-bottom:18px; }
+  .logo{ font-size:1.05rem; font-style:italic; display:flex; align-items:center; gap:8px; color:var(--muz-ochiq); }
+  .logo .belgi{ filter:drop-shadow(0 0 6px rgba(180,220,255,.7)); }
+  .rejim{ font-size:1.2rem; opacity:.6; }
+
+  .markaz{ text-align:center; margin:30px 0 24px; }
+  .ajratuvchi{ display:flex; align-items:center; justify-content:center; gap:10px; color:var(--kumush); margin-bottom:14px; font-size:.85rem; }
+  .ajratuvchi .chiziq{ width:50px; height:1px; background:linear-gradient(90deg, transparent, var(--kumush), transparent); }
+  .sarlavha{ font-size:2.1rem; font-style:italic; font-weight:600; margin:0; color:var(--muz-ochiq); text-shadow:0 0 18px rgba(170,210,255,.35); }
+  .tag{ color:var(--kumush); font-size:.95rem; margin-top:10px; }
+
+  .statlar{ display:flex; gap:10px; justify-content:center; margin:22px 0; flex-wrap:wrap; }
+  .stat{
+    background:rgba(255,255,255,.06); border:1px solid rgba(200,225,255,.22); border-radius:12px;
+    padding:10px 16px; text-align:center; backdrop-filter:blur(10px);
+  }
+  .stat b{ display:block; font-size:1.15rem; }
+  .stat span{ font-size:.72rem; color:var(--kumush); }
+
+  /* ===== Muz-karta umumiy ko'rinish ===== */
+  .shisha{
+    background:linear-gradient(160deg, rgba(255,255,255,.12), rgba(180,210,255,.05));
+    border:1px solid rgba(200,225,255,.32);
+    border-radius:16px;
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    box-shadow:0 6px 26px rgba(0,10,30,.35), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+
+  .forma{ padding:22px; margin-bottom:34px; }
+  .forma h2{ font-size:1.1rem; font-style:italic; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  .forma .izoh{ color:var(--kumush); font-size:.85rem; margin:0 0 16px; }
+  .maydon{
+    width:100%; padding:11px 13px; margin-bottom:12px; border-radius:10px;
+    border:1px solid rgba(200,225,255,.28); background:rgba(255,255,255,.05);
+    color:var(--muz-ochiq); font-family:inherit; font-size:.95rem;
+  }
+  .maydon::placeholder{ color:#7f93ac; }
+  .maydon:focus{ outline:none; border-color:rgba(170,210,255,.7); background:rgba(255,255,255,.08); }
+  textarea.maydon{ resize:vertical; min-height:80px; }
+  .yuborish-tugma{
+    width:100%; padding:12px; border:none; border-radius:999px; cursor:pointer;
+    font-family:inherit; font-size:.98rem; font-weight:600; color:#06142c;
+    background:linear-gradient(135deg, #bfe0ff, #7fb6f5);
+    box-shadow:0 6px 18px rgba(110,170,240,.35);
+  }
+  .yuborish-tugma:disabled{ opacity:.6; cursor:default; }
+  .yuborish-tugma:active{ transform:translateY(1px); }
+
+  .royxat-sarlavha{ text-align:center; color:var(--kumush); font-style:italic; margin:28px 0 18px; display:flex; align-items:center; gap:12px; justify-content:center; }
+  .royxat-sarlavha .chiziq{ width:40px; height:1px; background:linear-gradient(90deg, transparent, var(--kumush), transparent); }
+
+  .fikr-karta{ padding:16px 18px; margin-bottom:14px; }
+  .fikr-top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .fikr-ism{ font-weight:700; color:var(--muz-ochiq); }
+  .fikr-vaqt{ font-size:.72rem; color:var(--kumush); white-space:nowrap; }
+  .fikr-matn{ margin:8px 0 10px; line-height:1.5; color:#e8f1fb; font-size:.95rem; word-break:break-word; }
+
+  .like-tugma{
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    background:linear-gradient(135deg, rgba(255,140,60,.2), rgba(255,90,30,.08));
+    border:1px solid rgba(255,160,90,.4); color:#ffd7b0;
+    padding:6px 14px; border-radius:999px; font-size:.9rem; font-family:inherit;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .like-tugma:hover{ background:linear-gradient(135deg, rgba(255,140,60,.32), rgba(255,90,30,.16)); }
+  .like-tugma:active{ transform:scale(.93); }
+  .like-tugma:disabled{ opacity:.6; cursor:default; }
+
+  .bosh-xabar{ text-align:center; color:var(--kumush); font-style:italic; padding:20px 0; }
+</style>
+</head>
+<body>
+
+<div class="yulduzlar"></div>
+<div class="oy-nuri"></div>
+<div class="oy"></div>
+<div id="qor"></div>
+
+<svg class="tog" viewBox="0 0 1440 220" preserveAspectRatio="none" height="150" width="100%">
+  <polygon points="0,220 0,140 180,70 340,130 520,55 720,120 900,60 1100,135 1260,80 1440,150 1440,220" fill="#0e1c3a" opacity="0.85"/>
+  <polygon points="0,220 0,175 160,120 300,165 480,110 650,160 820,105 1000,165 1180,120 1440,175 1440,220" fill="#081326"/>
+</svg>
+
+<div class="sahifa">
+
+  <div class="peshtaxta">
+    <div class="logo"><span class="belgi">❆</span> Fikrlar Osmoni</div>
+    <div class="rejim">🌙 ☀️</div>
+  </div>
+
+  <div class="markaz">
+    <div class="ajratuvchi"><span class="chiziq"></span>❆<span class="chiziq"></span></div>
+    <h1 class="sarlavha">Fikrlar Osmoni</h1>
+    <p class="tag">— Sizning fikringiz biz uchun muhim —</p>
+  </div>
+
+  <div class="statlar">
+    <div class="stat"><b id="jamiFikr">0</b><span>💬 Jami fikrlar</span></div>
+    <div class="stat"><b id="jamiLike">0</b><span>🔥 Yoqtirishlar</span></div>
+    <div class="stat"><b>❄</b><span>Fikrlar osmoni</span></div>
+  </div>
+
+  <div class="forma shisha">
+    <h2>💬 Fikr yozing</h2>
+    <p class="izoh">O'z fikringizni qoldiring...</p>
+    <input id="ism" class="maydon" type="text" maxlength="100" placeholder="Ismingiz">
+    <textarea id="fikrMatni" class="maydon" maxlength="500" placeholder="Fikringiz..."></textarea>
+    <button id="yuborishBtn" class="yuborish-tugma" onclick="yuborish()">➤ Yuborish</button>
+  </div>
+
+  <div class="royxat-sarlavha"><span class="chiziq"></span>❆ Fikrlar ❆<span class="chiziq"></span></div>
+
+  <div id="royxat"></div>
+
+</div>
+
+<script>
+const API = "/.netlify/functions/api";
+
+function qorYarat(){
+  const idish = document.getElementById('qor');
+  const soni = window.innerWidth < 600 ? 35 : 60;
+  for(let i=0;i<soni;i++){
+    const dona = document.createElement('span');
+    dona.className = 'qor-dona';
+    const chap = Math.random()*100;
+    const kechikish = -(Math.random()*18);
+    const davomiylik = 9 + Math.random()*13;
+    const olcham = 0.5 + Math.random()*1.3;
+    const shaffoflik = 0.35 + Math.random()*0.6;
+    dona.style.left = chap+'vw';
+    dona.style.animationDelay = kechikish+'s';
+    dona.style.animationDuration = davomiylik+'s';
+    dona.style.fontSize = olcham+'rem';
+    dona.style.opacity = shaffoflik;
+    dona.textContent = Math.random()>0.5 ? '❄' : '•';
+    idish.appendChild(dona);
+  }
+}
+qorYarat();
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function formatVaqt(iso){
+  const d = new Date(iso);
+  const p = n => String(n).padStart(2,'0');
+  return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());
+}
+
+function render(rows){
+  const royxat = document.getElementById('royxat');
+  royxat.innerHTML = '';
+  if(!rows.length){
+    royxat.innerHTML = '<p class="bosh-xabar">Hali hech kim fikr qoldirmagan. Birinchi bo\'ling ❄</p>';
+  } else {
+    rows.forEach(r=>{
+      const karta = document.createElement('div');
+      karta.className = 'fikr-karta shisha';
+      karta.innerHTML =
+        '<div class="fikr-top">'+
+          '<span class="fikr-ism">'+escapeHtml(r.name)+'</span>'+
+          '<span class="fikr-vaqt">'+formatVaqt(r.created_at)+'</span>'+
+        '</div>'+
+        '<p class="fikr-matn">'+escapeHtml(r.comment)+'</p>'+
+        '<button class="like-tugma" data-id="'+r.id+'">🔥 <span>'+r.likes+'</span></button>';
+      royxat.appendChild(karta);
+    });
+  }
+  document.getElementById('jamiFikr').textContent = rows.length;
+  document.getElementById('jamiLike').textContent = rows.reduce((j,r)=>j+Number(r.likes||0),0);
+}
+
+async function load(){
+  try{
+    const res = await fetch(API);
+    const rows = await res.json();
+    render(Array.isArray(rows) ? rows : []);
+  }catch(e){ console.error(e); }
+}
+
+async function yuborish(){
+  const ismEl = document.getElementById('ism');
+  const fikrEl = document.getElementById('fikrMatni');
+  const name = ismEl.value.trim();
+  const comment = fikrEl.value.trim();
+  if(!name || !comment){ alert('Iltimos, ism va fikringizni kiriting'); return; }
+  const btn = document.getElementById('yuborishBtn');
+  btn.disabled = true;
+  try{
+    await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name, comment }) });
+    ismEl.value = ''; fikrEl.value = '';
+    await load();
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.getElementById('royxat').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('.like-tugma');
+  if(!btn) return;
+  btn.disabled = true;
+  await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'like', id: btn.dataset.id }) });
+  await load();
+});
+
+load();
+</script>
+</body>
+</html>
